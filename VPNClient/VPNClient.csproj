@@ -33,7 +33,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotRas, Version=1.3.4823.23267, Culture=neutral, PublicKeyToken=b378f04384b7892a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DotRasV1.3\Libraries\NET40\WIN8\DotRas.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateRasEntry.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="NewConnection.cs" />
     <Compile Include="NewConnectionForm.cs">
@@ -89,6 +97,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ConnectionInfo.txt" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WIN2K8\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WIN2K8\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WIN2K\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WIN2K\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WIN7\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WIN7\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WIN8\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WIN8\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WINXP\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET20\WINXP\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WIN2K8\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WIN2K8\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WIN2K\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WIN2K\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WIN7\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WIN7\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WIN8\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WIN8\DotRas.xml" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WINXP\DotRas.dll" />
+    <Content Include="DotRasV1.3\Libraries\NET40\WINXP\DotRas.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

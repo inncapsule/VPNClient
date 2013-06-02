@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DotRas;
 
 namespace VPNClient
 {
@@ -19,20 +20,30 @@ namespace VPNClient
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            this.Refresh();
+            for (int numberOfConnection = 0; numberOfConnection < Data.RasEntries.Count; numberOfConnection++)
+            {
+                if (cmbServerChoice.SelectedItem.Equals(Data.RasEntries[numberOfConnection].getEntryName())) ;
+                {
+                    RasDialer dial = new RasDialer();
+
+                    dial.EntryName = Data.RasEntries[numberOfConnection].getEntryName();
+                    dial.Dial();
+                    
+                }
+            }
         }
 
         private void cmbServerChoice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int connections = 0; connections < Data.ConnectionList.Count; connections++)
-            {
-                cmbServerChoice.Items.Add(Data.ConnectionList[connections].getConnectionName());
-            }
-        }
+            cmbServerChoice.MaxDropDownItems = 5;
+        }   
 
         private void btnNewConnection_Click(object sender, EventArgs e)
         {
-            new NewConnectionForm().ShowDialog();
+            NewConnectionForm newC = new NewConnectionForm();
+
+            newC.FormClosed +=new FormClosedEventHandler(newC_FormClosed);
+            newC.Show();
 
         }
 
@@ -41,9 +52,13 @@ namespace VPNClient
             this.Close();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void newC_FormClosed(object sender, FormClosedEventArgs e)
         {
-            cmbServerChoice.DataSource = Data.ConnectionList;
+            cmbServerChoice.Items.Clear();
+            for (int connection = 0; connection < Data.RasEntries.Count; connection++)
+            {
+                cmbServerChoice.Items.Add(Data.RasEntries[connection].getEntryName());
+            }
         }
     }
 }

@@ -141,6 +141,7 @@
             this.cboxRememberNC.TabIndex = 10;
             this.cboxRememberNC.Text = "Remember username and password";
             this.cboxRememberNC.UseVisualStyleBackColor = true;
+            this.cboxRememberNC.CheckedChanged += new System.EventHandler(this.cboxRememberNC_CheckedChanged);
             // 
             // NewConnectionForm
             // 

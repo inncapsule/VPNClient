@@ -38,6 +38,7 @@
             // cmbServerChoice
             // 
             this.cmbServerChoice.AccessibleName = "cmbServerChoice";
+            this.cmbServerChoice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbServerChoice.FormattingEnabled = true;
             this.cmbServerChoice.Location = new System.Drawing.Point(12, 73);
             this.cmbServerChoice.Name = "cmbServerChoice";
@@ -99,7 +100,6 @@
             this.Controls.Add(this.cmbServerChoice);
             this.Name = "MainForm";
             this.Text = "VPN connector";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

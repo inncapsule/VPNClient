@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DotRas;
 
 namespace VPNClient
 {
@@ -18,16 +19,22 @@ namespace VPNClient
 
         private void btnOkNC_Click(object sender, EventArgs e)
         {
-            Data.ConnectionList.Add(new NewConnection(txtConnectionNameNC.Text, txtAddressNC.Text, txtUserName.Text, txtPassword.Text));
-            this.Close();
-            
-            
-
+            //Data.ConnectionList.Add(new NewConnection(txtConnectionNameNC.Text, txtAddressNC.Text, txtUserName.T()ext, txtPassword.Text));
+            Data.RasEntries.Add(new CreateRasEntry(txtConnectionNameNC.Text, txtAddressNC.Text));
+            this.Close();           
         }
 
         private void btnCancelNC_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cboxRememberNC_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cboxRememberNC.Checked)
+            {
+                
+            }
         }
     }
 }

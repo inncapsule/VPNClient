@@ -12,10 +12,9 @@ namespace VPNClient
         protected String connectionUsername = null;
         protected String connectionSecret = null;
 
-
         public NewConnection()
         {
-
+            
         }
 
         /// <summary>
