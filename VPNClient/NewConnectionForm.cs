@@ -20,7 +20,7 @@ namespace VPNClient
         private void btnOkNC_Click(object sender, EventArgs e)
         {
             //Data.ConnectionList.Add(new NewConnection(txtConnectionNameNC.Text, txtAddressNC.Text, txtUserName.T()ext, txtPassword.Text));
-            Data.RasEntries.Add(new CreateRasEntry(txtConnectionNameNC.Text, txtAddressNC.Text));
+            Data.RasEntries.Add(new NewEntry(txtConnectionNameNC.Text, txtAddressNC.Text));
             this.Close();           
         }
 

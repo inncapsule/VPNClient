@@ -8,7 +8,8 @@ namespace VPNClient
 {
     class Data
     {
-        public static List<NewConnection> ConnectionList = new List<NewConnection>();
-        public static List<CreateRasEntry> RasEntries = new List<CreateRasEntry>();
+        public static List<NewEntry> RasEntries = new List<NewEntry>();
+        public static List<RasEntry> RasEntries2 = new List<RasEntry>();
+        public static RasPhoneBook PBook = new RasPhoneBook();
     }
 }

@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{197E7513-BF8D-43C3-805B-D5A23B8E2A34}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VPNClient</RootNamespace>
     <AssemblyName>VPNClient</AssemblyName>
@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateRasEntry.cs" />
+    <Compile Include="NewEntry.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="NewConnection.cs" />
     <Compile Include="NewConnectionForm.cs">

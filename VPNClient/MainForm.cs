@@ -20,13 +20,16 @@ namespace VPNClient
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
+
             for (int numberOfConnection = 0; numberOfConnection < Data.RasEntries.Count; numberOfConnection++)
             {
-                if (cmbServerChoice.SelectedItem.Equals(Data.RasEntries[numberOfConnection].getEntryName())) ;
+                if (cmbServerChoice.SelectedItem.Equals(Data.RasEntries[numberOfConnection].getEntryName()))
                 {
+                    
                     RasDialer dial = new RasDialer();
-
+                    
                     dial.EntryName = Data.RasEntries[numberOfConnection].getEntryName();
+                    dial.PhoneBookPath = RasPhoneBook.GetPhoneBookPath(RasPhoneBookType.User);
                     dial.Dial();
                     
                 }
@@ -57,6 +60,7 @@ namespace VPNClient
             cmbServerChoice.Items.Clear();
             for (int connection = 0; connection < Data.RasEntries.Count; connection++)
             {
+                Console.WriteLine(Data.RasEntries[connection].getEntryName());
                 cmbServerChoice.Items.Add(Data.RasEntries[connection].getEntryName());
             }
         }
