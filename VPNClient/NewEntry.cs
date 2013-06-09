@@ -70,7 +70,8 @@ namespace VPNClient
             newRas.Options.RequireMSChap2 = true;
 
             newRas.Options.Internet = false;
-            Data.PBook.Entries.Add(newRas);
+
+            Data.Pbk.Entries.Add(newRas);
 
         }
     }

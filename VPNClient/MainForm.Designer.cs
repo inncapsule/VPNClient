@@ -100,6 +100,7 @@
             this.Controls.Add(this.cmbServerChoice);
             this.Name = "MainForm";
             this.Text = "VPN connector";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

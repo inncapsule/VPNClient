@@ -21,14 +21,14 @@ namespace VPNClient
         private void btnConnect_Click(object sender, EventArgs e)
         {
 
-            for (int numberOfConnection = 0; numberOfConnection < Data.RasEntries.Count; numberOfConnection++)
+            for (int connectionNumber = 0; connectionNumber < Data.Pbk.Entries.Count; connectionNumber++)
             {
-                if (cmbServerChoice.SelectedItem.Equals(Data.RasEntries[numberOfConnection].getEntryName()))
+                if (cmbServerChoice.SelectedItem.Equals(Data.Pbk.Entries[connectionNumber].Name))
                 {
                     
                     RasDialer dial = new RasDialer();
-                    
-                    dial.EntryName = Data.RasEntries[numberOfConnection].getEntryName();
+
+                    dial.EntryName = Data.Pbk.Entries[connectionNumber].Name;
                     dial.PhoneBookPath = RasPhoneBook.GetPhoneBookPath(RasPhoneBookType.User);
                     dial.Dial();
                     
@@ -58,10 +58,21 @@ namespace VPNClient
         private void newC_FormClosed(object sender, FormClosedEventArgs e)
         {
             cmbServerChoice.Items.Clear();
-            for (int connection = 0; connection < Data.RasEntries.Count; connection++)
+            for (int connection = 0; connection < Data.Pbk.Entries.Count; connection++)
             {
-                Console.WriteLine(Data.RasEntries[connection].getEntryName());
-                cmbServerChoice.Items.Add(Data.RasEntries[connection].getEntryName());
+                cmbServerChoice.Items.Add(Data.Pbk.Entries[connection].Name);
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Data.Pbk.Open(Data.PbkPath);
+
+
+            for (int pbkEntry = 0; pbkEntry < Data.Pbk.Entries.Count; pbkEntry++)
+            {
+                cmbServerChoice.Items.Add(Data.Pbk.Entries[pbkEntry].Name);
+                Console.WriteLine(pbkEntry);
             }
         }
     }
