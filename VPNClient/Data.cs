@@ -8,10 +8,19 @@ namespace VPNClient
 {
     class Data
     {
-        //public static List<NewEntry> RasEntries = new List<NewEntry>();
-        //public static List<RasEntry> RasEntries2 = new List<RasEntry>();
         public static RasPhoneBook Pbk = new RasPhoneBook();
         public static String PbkPath = RasPhoneBook.GetPhoneBookPath(RasPhoneBookType.User);
 
+        public static bool NameExists(String name)
+        {
+            foreach (RasEntry pbkEntry in Data.Pbk.Entries)
+            {
+                if (pbkEntry.Name.Equals(name))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

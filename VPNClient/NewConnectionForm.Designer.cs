@@ -38,7 +38,6 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnCancelNC = new System.Windows.Forms.Button();
             this.btnOkNC = new System.Windows.Forms.Button();
-            this.cboxRememberNC = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblConnectionName
@@ -132,23 +131,11 @@
             this.btnOkNC.UseVisualStyleBackColor = true;
             this.btnOkNC.Click += new System.EventHandler(this.btnOkNC_Click);
             // 
-            // cboxRememberNC
-            // 
-            this.cboxRememberNC.AutoSize = true;
-            this.cboxRememberNC.Location = new System.Drawing.Point(15, 257);
-            this.cboxRememberNC.Name = "cboxRememberNC";
-            this.cboxRememberNC.Size = new System.Drawing.Size(195, 17);
-            this.cboxRememberNC.TabIndex = 10;
-            this.cboxRememberNC.Text = "Remember username and password";
-            this.cboxRememberNC.UseVisualStyleBackColor = true;
-            this.cboxRememberNC.CheckedChanged += new System.EventHandler(this.cboxRememberNC_CheckedChanged);
-            // 
             // NewConnectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 334);
-            this.Controls.Add(this.cboxRememberNC);
             this.Controls.Add(this.btnOkNC);
             this.Controls.Add(this.btnCancelNC);
             this.Controls.Add(this.txtPassword);
@@ -178,6 +165,5 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnCancelNC;
         private System.Windows.Forms.Button btnOkNC;
-        private System.Windows.Forms.CheckBox cboxRememberNC;
     }
 }

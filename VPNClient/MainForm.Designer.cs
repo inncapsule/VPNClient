@@ -33,6 +33,8 @@
             this.btnOkNC = new System.Windows.Forms.Button();
             this.btnNewConnection = new System.Windows.Forms.Button();
             this.lblChoose = new System.Windows.Forms.Label();
+            this.proBarMain = new System.Windows.Forms.ProgressBar();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmbServerChoice
@@ -88,11 +90,34 @@
             this.lblChoose.TabIndex = 12;
             this.lblChoose.Text = "Choose connection:";
             // 
+            // proBarMain
+            // 
+            this.proBarMain.Location = new System.Drawing.Point(84, 158);
+            this.proBarMain.Name = "proBarMain";
+            this.proBarMain.Size = new System.Drawing.Size(112, 23);
+            this.proBarMain.TabIndex = 13;
+            this.proBarMain.Visible = false;
+            // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.AccessibleName = "btnConnect";
+            this.btnDisconnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.btnDisconnect.Location = new System.Drawing.Point(85, 108);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(112, 44);
+            this.btnDisconnect.TabIndex = 14;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Visible = false;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.btnDisconnect);
+            this.Controls.Add(this.proBarMain);
             this.Controls.Add(this.lblChoose);
             this.Controls.Add(this.btnNewConnection);
             this.Controls.Add(this.btnOkNC);
@@ -113,6 +138,8 @@
         private System.Windows.Forms.Button btnOkNC;
         private System.Windows.Forms.Button btnNewConnection;
         private System.Windows.Forms.Label lblChoose;
+        private System.Windows.Forms.ProgressBar proBarMain;
+        private System.Windows.Forms.Button btnDisconnect;
     }
 }
 

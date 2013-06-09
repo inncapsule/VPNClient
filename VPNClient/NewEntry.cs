@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using DotRas;
 using System.Collections.ObjectModel;
+using System.Net.NetworkInformation;
+using System.Net;
+using System.Security;
 
 namespace VPNClient
 {
@@ -13,6 +16,7 @@ namespace VPNClient
         private String entryAddress = null;
         private String entryUsername = null;
         private String entrySecret = null;
+        private Boolean rememberSecret = false;
         private RasEntry newRas;
         private RasDevice rDevice;
 
@@ -29,6 +33,17 @@ namespace VPNClient
             NewRasEntry();
         }
 
+        public NewEntry(String ConnectionName, String address, String username, String secret, Boolean remember)
+        {
+            setEntryName(ConnectionName);
+            setEntryAddress(address);
+            setUserName(username);
+            setSecret(secret);
+            NewRasEntry();
+            
+
+        }
+
         private void setEntryName(String name)
         {
             this.entryName = name;
@@ -37,6 +52,16 @@ namespace VPNClient
         private void setEntryAddress(String address)
         {
             this.entryAddress = address;
+        }
+
+        private void setUserName(String username)
+        {
+            this.entryUsername = username;
+        }
+
+        private void setSecret(String secret)
+        {
+            this.entrySecret = secret;
         }
 
         public String getEntryName()
@@ -71,8 +96,15 @@ namespace VPNClient
 
             newRas.Options.Internet = false;
 
-            Data.Pbk.Entries.Add(newRas);
+            newRas.Options.UseLogOnCredentials = true;
 
+            NetworkCredential cred = new NetworkCredential();
+            cred.UserName = this.entryUsername;
+            cred.Password = this.entrySecret;
+           
+
+            Data.Pbk.Entries.Add(newRas);
+            Data.Pbk.Entries[Data.Pbk.Entries.Last().Name].UpdateCredentials(cred);
         }
     }
 }

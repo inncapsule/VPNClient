@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -12,28 +13,54 @@ namespace VPNClient
 {
     public partial class MainForm : Form
     {
+
+        private RasDialer dial = new RasDialer();
+
         public MainForm()
         {
             InitializeComponent();
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Data.Pbk.Open(Data.PbkPath);
+            refreshServerChoice();
+        }
+
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
+            proBarMain.Visible = true;
 
-            for (int connectionNumber = 0; connectionNumber < Data.Pbk.Entries.Count; connectionNumber++)
+
+            for (int barValue = 0; barValue < 70; barValue++)
             {
-                if (cmbServerChoice.SelectedItem.Equals(Data.Pbk.Entries[connectionNumber].Name))
-                {
-                    
-                    RasDialer dial = new RasDialer();
+                proBarMain.Value = barValue;                
+            }
 
-                    dial.EntryName = Data.Pbk.Entries[connectionNumber].Name;
-                    dial.PhoneBookPath = RasPhoneBook.GetPhoneBookPath(RasPhoneBookType.User);
-                    dial.Dial();
-                    
+            if (!cmbServerChoice.Text.Equals(""))
+            {
+                for (int connectionNumber = 0; connectionNumber < Data.Pbk.Entries.Count; connectionNumber++)
+                {
+                    if (cmbServerChoice.SelectedItem.Equals(Data.Pbk.Entries[connectionNumber].Name))
+                    {
+                        dial.EntryName = Data.Pbk.Entries[connectionNumber].Name;
+                        dial.Credentials = Data.Pbk.Entries[connectionNumber].GetCredentials();
+                        dial.PhoneBookPath = RasPhoneBook.GetPhoneBookPath(RasPhoneBookType.User);
+                        dial.DialAsync();
+
+                        if (dial.Credentials.Password.Equals(""))
+                        {
+                            dial.DialAsyncCancel();
+                        }
+
+                        dial.Error += new EventHandler<ErrorEventArgs>(dial_Error);
+                        dial.DialCompleted += new EventHandler<DialCompletedEventArgs>(dial_DialCompleted);
+
+                    }
                 }
             }
+            else proBarMain.Visible = false;
         }
 
         private void cmbServerChoice_SelectedIndexChanged(object sender, EventArgs e)
@@ -57,22 +84,52 @@ namespace VPNClient
 
         private void newC_FormClosed(object sender, FormClosedEventArgs e)
         {
-            cmbServerChoice.Items.Clear();
-            for (int connection = 0; connection < Data.Pbk.Entries.Count; connection++)
-            {
-                cmbServerChoice.Items.Add(Data.Pbk.Entries[connection].Name);
-            }
+            refreshServerChoice();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void dial_Error(object sender, ErrorEventArgs e)
         {
-            Data.Pbk.Open(Data.PbkPath);
+            MessageBox.Show("Test");
+        }
 
+        private void dial_DialCompleted(object sender, DialCompletedEventArgs e)
+        {
+            while (proBarMain.Value < 100)
+            {
+                proBarMain.Value += 1;
+            }
+
+            cmbServerChoice.Enabled = false;
+            btnConnect.Visible = false;
+            btnDisconnect.Visible = true;
+        }
+
+        private void refreshServerChoice()
+        {
+            cmbServerChoice.Items.Clear();
 
             for (int pbkEntry = 0; pbkEntry < Data.Pbk.Entries.Count; pbkEntry++)
             {
                 cmbServerChoice.Items.Add(Data.Pbk.Entries[pbkEntry].Name);
-                Console.WriteLine(pbkEntry);
+            }
+        }
+
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            foreach (RasConnection connection in RasConnection.GetActiveConnections())
+            {
+                if (connection.EntryName.Equals(dial.EntryName))
+                {
+                    connection.HangUp();
+                    btnDisconnect.Visible = false;
+                    btnConnect.Visible = true;
+                    cmbServerChoice.Enabled = true;
+
+                    while (proBarMain.Value > 0)
+                    {
+                        proBarMain.Value -= 1;
+                    }                  
+                }
             }
         }
     }
